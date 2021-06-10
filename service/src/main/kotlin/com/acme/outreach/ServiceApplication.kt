@@ -1,12 +1,11 @@
 package com.acme.outreach
 
-import com.github.cloudyrock.spring.v5.EnableMongock
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
-@EnableMongock
+// @EnableMongock
 @SpringBootApplication
 // @ComponentScan("com.acme")
 class ServiceApplication : SpringBootServletInitializer() {
