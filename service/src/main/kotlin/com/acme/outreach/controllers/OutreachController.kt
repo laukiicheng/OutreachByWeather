@@ -1,15 +1,14 @@
 package com.acme.outreach.controllers
 
+import com.acme.outreach.exceptions.WeatherDataNotFoundException
 import com.acme.outreach.models.OutreachRequest
 import com.acme.outreach.models.OutreachResponse
 import com.acme.outreach.openweather.OpenWeatherService
 import com.acme.outreach.recommender.OutreachRecommenderService
 import mu.KotlinLogging
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 private val logger = KotlinLogging.logger {}
 
@@ -31,7 +30,7 @@ class OutreachController(
             """.trimIndent()
         }
 
-        val weather = openWeatherService.getWeather(outreachRequest.city, outreachRequest.state, outreachRequest.date)
+        openWeatherService.getWeather(outreachRequest.city, outreachRequest.state, outreachRequest.date)
         val outreachRecommendation = outreachRecommenderService.getOutreach("")
 
         return ResponseEntity.ok(
@@ -44,5 +43,16 @@ class OutreachController(
                 )
             }
         )
+    }
+
+    @ExceptionHandler(WeatherDataNotFoundException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleWeatherDataNotFoundException() {
+        logger.info {
+            """
+             Handling ${WeatherDataNotFoundException::class.simpleName}
+             Return ${HttpStatus.BAD_REQUEST}
+            """.trimIndent()
+        }
     }
 }

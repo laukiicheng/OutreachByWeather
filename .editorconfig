@@ -1,0 +1,5 @@
+[*.{kt,kts}]
+# This can't be configured in the plugin, so we need to configure it here.
+kotlin_imports_layout = idea
+max_line_length = 500
+disabled_rules=no-wildcard-imports

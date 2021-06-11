@@ -7,5 +7,7 @@ Email, SMS, IVR, Web, Mail
 * Language: Kotlin
 * Build Tool: Gradle
 
-# App Created
-* https://spring.io/guides/tutorials/spring-boot-kotlin/
+# TODO: 
+* Swagger
+* Caching
+* Web UI
