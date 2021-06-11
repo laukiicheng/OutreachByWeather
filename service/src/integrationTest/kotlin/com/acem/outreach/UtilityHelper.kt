@@ -1,6 +1,11 @@
 package com.acem.outreach
 
-import com.revelhealth.commons.springcore.serialization.SerializationUtils
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.MapperFeature
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.core.io.FileSystemResource
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -12,13 +17,23 @@ import java.nio.file.Files
 import java.util.Properties
 import java.util.Random
 import kotlin.streams.asSequence
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 
 class UtilityHelper {
 
     companion object {
         const val testPropertiesFilePath = "application-integration-test.properties"
         private val charPool = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        private val objectMapper = SerializationUtils.buildJacksonObjectMapper()
+        private val objectMapper = buildJacksonObjectMapper()
+
+        fun buildJacksonObjectMapper(): ObjectMapper {
+            return Jackson2ObjectMapperBuilder.json()
+                .featuresToEnable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, JsonParser.Feature.STRICT_DUPLICATE_DETECTION)
+                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .build<ObjectMapper>()
+                // .registerKotlinModule()
+                .registerModules(JavaTimeModule())
+        }
 
         fun createRandomAlphaNumeric(length: Int = 5): String {
             return Random()
