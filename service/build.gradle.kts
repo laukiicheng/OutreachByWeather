@@ -38,6 +38,7 @@ dependencies {
 
     implementation("javax.validation:validation-api:2.0.1.Final")
     // Json logging
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4.1")
     implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
     implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
     implementation("com.sumologic.plugins.logback:sumologic-logback-appender:1.5")
