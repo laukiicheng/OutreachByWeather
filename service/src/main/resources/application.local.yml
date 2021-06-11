@@ -1,0 +1,32 @@
+server:
+  servlet:
+    contextPath: /channel-service
+    encoding:
+      force: false
+
+  port: 8080
+  ssl:
+    enabled: true
+    key-store-type: "PKCS12"
+    key-store: "tls/keystore.p12"
+    key-store-password: '${KEY_STORE_PASSWORD}'
+    key-alias: "tomcat"
+  error:
+    include-binding-errors: always # Necessary for expected validation responses in http requests
+    include-message: always
+
+spring:
+  config:
+    use-legacy-processing: true #https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4
+  application:
+    name: outreach-weather-service
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+openWeather:
+  apiKey: ""
+  Url: "api.openweathermap.org/data/2.5/weather"
