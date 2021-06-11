@@ -1,6 +1,7 @@
 package io.kotest.provided
 
 import io.kotest.core.config.AbstractProjectConfig
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
@@ -29,7 +30,7 @@ object ProjectConfig : AbstractProjectConfig() {
         println(
             """
             ------------------------------------------------
-            TOTAL TIME OF TEST SUITE RUN: ${timeMark.elapsedNow().inSeconds} SECONDS
+            TOTAL TIME OF TEST SUITE RUN: ${timeMark.elapsedNow().toDouble(DurationUnit.SECONDS)} SECONDS
             ------------------------------------------------
             """.trimIndent()
         )

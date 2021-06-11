@@ -1,0 +1,10 @@
+version: '3'
+services:
+  mongo-db:
+    image: mongo:4.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: local
+      MONGO_INITDB_ROOT_PASSWORD: localPass
+    ports:
+      - 27017:27017
+

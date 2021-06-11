@@ -38,7 +38,7 @@ class OutreachController(
             """.trimIndent()
         }
 
-        openWeatherService.getWeather(outreachRequest.city, outreachRequest.stateCode)
+        // openWeatherService.getWeather(outreachRequest.city, outreachRequest.stateCode)
         val outreachRecommendation = outreachRecommenderService.getOutreach("")
 
         return ResponseEntity.ok(

@@ -55,7 +55,7 @@ dependencies {
 
 //    testImplementation("org.hamcrest:hamcrest-core:1.3")
 
-    integrationTestImplementation("io.kotest:kotest-extensions-spring:${Versions.kotest}")
+    integrationTestImplementation("io.kotest:kotest-extensions-spring-jvm:4.4.3")
     integrationTestImplementation("org.springframework.boot:spring-boot-test-autoconfigure")
     integrationTestImplementation("org.springframework:spring-test")
 

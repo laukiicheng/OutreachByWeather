@@ -3,6 +3,7 @@ package io.kotest.provided
 import io.kotest.core.listeners.TestListener
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
@@ -29,7 +30,7 @@ object BaseIntegrationTestListener : TestListener {
             Name: ${testCase.description.name}
             Origin: ${testCase.description.parents().first().name}
             Result: ${result.status}
-            Run Time: ${timeMark.elapsedNow().inMilliseconds} MILLISECONDS
+            Run Time: ${timeMark.elapsedNow().toDouble(DurationUnit.MILLISECONDS)} MILLISECONDS
             ------------------------------------------------
             """.trimIndent()
         )

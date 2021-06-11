@@ -1,16 +1,16 @@
 server:
   servlet:
-    contextPath: /channel-service
+    contextPath: /outreach-weather-service
     encoding:
       force: false
 
   port: 8080
-  ssl:
-    enabled: true
-    key-store-type: "PKCS12"
-    key-store: "tls/keystore.p12"
-    key-store-password: '${KEY_STORE_PASSWORD}'
-    key-alias: "tomcat"
+#  ssl:
+#    enabled: true
+#    key-store-type: "PKCS12"
+#    key-store: "tls/keystore.p12"
+#    key-store-password: '${KEY_STORE_PASSWORD}'
+#    key-alias: "tomcat"
   error:
     include-binding-errors: always # Necessary for expected validation responses in http requests
     include-message: always

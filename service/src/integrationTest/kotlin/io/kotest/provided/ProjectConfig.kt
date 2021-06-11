@@ -1,11 +1,10 @@
 package io.kotest.provided
 
-import com.revelhealth.channelservice.TestContainerUtils
-import com.revelhealth.channelservice.UtilityHelper
 import io.kotest.core.config.AbstractProjectConfig
 import io.kotest.spring.SpringAutowireConstructorExtension
 import io.kotest.spring.SpringListener
 import java.lang.Thread.sleep
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
@@ -30,21 +29,21 @@ object ProjectConfig : AbstractProjectConfig() {
     override fun beforeAll() {
         timeMark = monotonic.markNow()
 
-        TestContainerUtils.startTestContainers()
+        // TestContainerUtils.startTestContainers()
 
-        // TODO: MAS-518 Call health check to wait for service to start before executing integration tests. The service needs time to connect to it's dependencies (Mongo and Axon)
+        // TODO: Call health check to wait for service to start before executing integration tests. The service needs time to connect to it's dependencies (Mongo and Axon)
         sleep(5000)
     }
 
     @ExperimentalTime
     override fun afterAll() {
-        TestContainerUtils.stopTestContainers()
-        UtilityHelper.clearPropertiesFile()
+        // TestContainerUtils.stopTestContainers()
+        // UtilityHelper.clearPropertiesFile()
 
         println(
             """
             ------------------------------------------------
-            TOTAL TIME OF TEST SUITE RUN: ${timeMark.elapsedNow().inSeconds} SECONDS
+            TOTAL TIME OF TEST SUITE RUN: ${timeMark.elapsedNow().toDouble(DurationUnit.SECONDS)} SECONDS
             ------------------------------------------------
             """.trimIndent()
         )

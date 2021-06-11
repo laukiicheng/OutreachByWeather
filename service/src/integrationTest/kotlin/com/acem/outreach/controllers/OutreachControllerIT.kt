@@ -9,19 +9,17 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.TestPropertySource
-import org.springframework.util.ResourceUtils
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = [ServiceApplication::class])
-@TestPropertySource("${ResourceUtils.CLASSPATH_URL_PREFIX}${UtilityHelper.testPropertiesFilePath}")
+// @TestPropertySource("${ResourceUtils.CLASSPATH_URL_PREFIX}${UtilityHelper.testPropertiesFilePath}")
 class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseIntegrationTest() {
 
     init {
-        "POST should return when" {
+        "POST should OK when city is Minneapolis and state is MN" {
             val outreachRequest = OutreachRequest(
-                city = "",
-                stateCode = ""
+                city = "Minneapolis",
+                stateCode = "MN"
             )
 
             val result = restTemplate.postForEntity(
@@ -30,7 +28,7 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
                 String::class.java
             )
 
-            result.statusCode shouldBe HttpStatus.CREATED
+            result.statusCode shouldBe HttpStatus.OK
         }
     }
 }
