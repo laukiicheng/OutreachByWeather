@@ -1,9 +1,17 @@
 package com.acme.outreach.models
 
-import java.util.Date
+import javax.validation.Valid
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 data class OutreachRequest(
+    @field:NotNull
+    @field:NotEmpty
+    @field:Valid
     val city: String,
-    val state: String,
-    val date: Date = Date()
+
+    @field:NotNull
+    @field:NotEmpty
+    @field:Valid
+    val stateCode: String
 )

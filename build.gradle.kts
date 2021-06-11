@@ -49,7 +49,8 @@ allprojects {
             setOf(
                 "import-ordering",
                 "experimental:indent",
-                "experimental:spacing-between-declarations-with-comments"
+                "experimental:spacing-between-declarations-with-comments",
+                "no-wildcard-imports"
             )
         )
         reporters {

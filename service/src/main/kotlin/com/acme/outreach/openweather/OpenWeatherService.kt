@@ -1,16 +1,15 @@
 package com.acme.outreach.openweather
 
 import com.acme.outreach.exceptions.WeatherDataNotFoundException
+import java.net.URI
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
-import java.net.URI
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
-import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
@@ -23,13 +22,12 @@ class OpenWeatherService(private val restTemplate: RestTemplate) {
     @Value("\${openWeather.Url}")
     lateinit var openWeatherApiUrl: String
 
-    fun getWeather(city: String, state: String, date: Date) {
+    fun getWeather(city: String, state: String) {
         logger.info {
             """
             Retrieving weather info from Open Weather API
             City $city
             State $state
-            Date $date
             """.trimIndent()
         }
 
@@ -54,7 +52,6 @@ class OpenWeatherService(private val restTemplate: RestTemplate) {
                 Body ${weatherResponse.body}
                 City $city
                 State $state
-                Date $date
                 """.trimIndent()
             )
         }
