@@ -11,3 +11,4 @@ Email, SMS, IVR, Web, Mail
 * Swagger
 * Caching
 * Web UI
+* Migration script to load city and state in DB. Use this for validation.

@@ -151,4 +151,4 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
-/service/src/main/resources/application.local.yaml
+/service/src/main/resources/application.local.yml
