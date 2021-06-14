@@ -13,5 +13,10 @@ data class OutreachRequest(
     @field:NotNull
     @field:NotEmpty
     @field:Valid
-    val stateCode: String
+    val stateCode: String,
+
+    @field:NotNull
+    @field:NotEmpty
+    @field:Valid
+    val countryCode: String
 )

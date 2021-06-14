@@ -38,18 +38,15 @@ class OutreachController(
             """.trimIndent()
         }
 
-        // openWeatherService.getWeather(outreachRequest.city, outreachRequest.stateCode)
-        val outreachRecommendation = outreachRecommenderService.getOutreach("")
-
-        return ResponseEntity.ok(
-            outreachRequest.let {
-                OutreachResponse(
-                    city = it.city,
-                    stateCode = it.stateCode,
-                    outreachRecommendation
-                )
-            }
+        val weatherForecast = openWeatherService.getWeather(outreachRequest.city, outreachRequest.stateCode, outreachRequest.countryCode)
+        val outreachRecommendation = OutreachResponse(
+            city = outreachRequest.city,
+            stateCode = outreachRequest.stateCode,
+            countryCode = outreachRequest.countryCode,
+            outreachByDay = weatherForecast.days.associate { it.date to outreachRecommenderService.getOutreach(it) }
         )
+
+        return ResponseEntity.ok(outreachRecommendation)
     }
 
     @ExceptionHandler(WeatherDataNotFoundException::class)

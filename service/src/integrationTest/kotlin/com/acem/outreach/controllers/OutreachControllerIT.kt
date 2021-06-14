@@ -3,6 +3,7 @@ package com.acem.outreach.controllers
 import com.acem.outreach.UtilityHelper
 import com.acme.outreach.ServiceApplication
 import com.acme.outreach.models.OutreachRequest
+import com.acme.outreach.models.OutreachResponse
 import io.kotest.matchers.shouldBe
 import io.kotest.provided.BaseIntegrationTest
 import org.springframework.boot.test.context.SpringBootTest
@@ -19,13 +20,15 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
         "POST should OK when city is Minneapolis and state is MN" {
             val outreachRequest = OutreachRequest(
                 city = "Minneapolis",
-                stateCode = "MN"
+                stateCode = "MN",
+                countryCode = "US"
             )
 
+            // TODO: Validate the response
             val result = restTemplate.postForEntity(
                 "/outreach",
                 UtilityHelper.createHttpEntity(outreachRequest),
-                String::class.java
+                OutreachResponse::class.java
             )
 
             result.statusCode shouldBe HttpStatus.OK
