@@ -12,3 +12,4 @@ Email, SMS, IVR, Web, Mail
 * Caching
 * Web UI
 * Migration script to load city and state in DB. Use this for validation.
+* Use Github Actions to create a CI/CD pipeline
