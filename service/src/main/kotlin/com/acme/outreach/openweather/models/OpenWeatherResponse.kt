@@ -7,9 +7,6 @@ data class OpenWeatherResponse(
 )
 
 data class DayPrediction(
-    @JsonProperty("dt")
-    val date: Int,
-
     @JsonProperty("dt_txt")
     val dateAsString: String,
 
