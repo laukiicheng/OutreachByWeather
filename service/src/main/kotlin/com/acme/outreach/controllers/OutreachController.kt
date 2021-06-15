@@ -39,12 +39,13 @@ class OutreachController(
         }
 
         val weatherForecast = openWeatherService.getWeather(outreachRequest.city, outreachRequest.stateCode, outreachRequest.countryCode)
-        // TODO: Limit outreach recommendation to current day plus 4
+        val weatherForecastFiveDays = weatherForecast.days.sortedBy { it.date }.takeLast(5)
+
         val outreachRecommendation = OutreachResponse(
             city = outreachRequest.city,
             stateCode = outreachRequest.stateCode,
             countryCode = outreachRequest.countryCode,
-            outreachByDay = weatherForecast.days.associate { it.date to outreachRecommenderService.getOutreach(it) }
+            outreachByDay = weatherForecastFiveDays.associate { it.date to outreachRecommenderService.getOutreach(it) }
         )
 
         return ResponseEntity.ok(outreachRecommendation)

@@ -24,7 +24,6 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
                 countryCode = "US"
             )
 
-            // TODO: Validate the response
             val result = restTemplate.postForEntity(
                 "/outreach",
                 UtilityHelper.createHttpEntity(outreachRequest),
@@ -32,6 +31,7 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
             )
 
             result.statusCode shouldBe HttpStatus.OK
+            // TODO: Validate the response
         }
     }
 }
