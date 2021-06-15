@@ -18,7 +18,11 @@ class OutreachRecommenderService {
             """.trimIndent()
         }
 
-        if (weather.general == GeneralWeather.SUNNY && weather.minimumTemp > 75) {
+        if (weather.minimumTemp > weather.maximumTemp) {
+            throw IllegalArgumentException("Minimum temperature ${weather.minimumTemp} should be less than or equal maximum temperature ${weather.maximumTemp}")
+        }
+
+        if (weather.general == GeneralWeather.SUNNY && weather.minimumTemp >= 75) {
             return OutreachChannel.SMS
         }
 
