@@ -8,7 +8,7 @@ import com.acme.outreach.openweather.models.OpenWeatherResponse
 import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
@@ -77,7 +77,7 @@ class OpenWeatherService(private val restTemplate: RestTemplate) {
         val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val daysOfForecast = weatherResponse.body?.list?.map {
             WeatherData(
-                date = LocalDate.parse(it.dateAsString, dateTimeFormatter),
+                dateTime = LocalDateTime.parse(it.dateAsString, dateTimeFormatter),
                 general = getGeneralWeather(it.weather.first().main),
                 minimumTemp = it.main.minimumTemperature,
                 maximumTemp = it.main.maximumTemperature

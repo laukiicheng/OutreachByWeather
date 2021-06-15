@@ -47,7 +47,7 @@ internal class OpenWeatherServiceTest : BaseStringSpec() {
             weatherForecast.days.count() shouldBe 1
             val dayOne = weatherForecast.days.first()
             with(dayOne) {
-                date shouldBe LocalDate.parse("2021-06-14")
+                dateTime shouldBe LocalDate.parse("2021-06-14")
                 general shouldBe GeneralWeather.CLOUDY
                 minimumTemp shouldBe 70
                 maximumTemp shouldBe 80

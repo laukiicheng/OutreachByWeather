@@ -10,7 +10,7 @@ Outreach Channels Email, SMS, IVR, UNKNOWN
 * Unit tests: kotest
 * Integration tests: Spring test
 
-# TODO: 
+# TODO
 * Swagger
 * Caching to Open weather
 * Web UI

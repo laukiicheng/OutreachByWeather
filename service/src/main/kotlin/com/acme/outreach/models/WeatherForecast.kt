@@ -1,13 +1,13 @@
 package com.acme.outreach.models
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class WeatherForecast(
     val days: List<WeatherData>
 )
 
 data class WeatherData(
-    val date: LocalDate,
+    val dateTime: LocalDateTime,
     val general: GeneralWeather,
     val minimumTemp: Double,
     val maximumTemp: Double

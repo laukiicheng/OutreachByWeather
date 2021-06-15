@@ -8,7 +8,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import io.kotest.provided.BaseStringSpec
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 internal class OutreachRecommenderServiceTest : BaseStringSpec() {
     private val getOutreachName = OutreachRecommenderService::getOutreach.name
@@ -76,7 +76,7 @@ internal class OutreachRecommenderServiceTest : BaseStringSpec() {
         maximumTemperature: Double = 0.0
     ): WeatherData =
         WeatherData(
-            date = LocalDate.now(),
+            dateTime = LocalDateTime.now(),
             general = generalWeather,
             minimumTemp = minimumTemperature,
             maximumTemp = maximumTemperature
