@@ -34,4 +34,8 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
             // TODO: Validate the response
         }
     }
+
+    // TODO: Write failing test cases
+
+    // TODO: Test ExceptionHandler in controller for WeatherDataNotFoundException
 }
