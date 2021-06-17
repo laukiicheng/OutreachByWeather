@@ -37,7 +37,7 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
             result?.body?.outreachByDay?.count() shouldBe 5
         }
 
-        "f: POST should return BAD_REQUEST when city is not found" {
+        "POST should return BAD_REQUEST when city is not found" {
             val outreachRequest = OutreachRequest(
                 city = "not a real city",
                 stateCode = "some state code",
