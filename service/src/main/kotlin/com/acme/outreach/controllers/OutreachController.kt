@@ -36,14 +36,18 @@ class OutreachController(
             Received ${OutreachRequest::class.simpleName}
             City ${outreachRequest.city}
             State ${outreachRequest.stateCode}
+            Country ${outreachRequest.countryCode}
             """.trimIndent()
         }
 
         val weatherForecast = openWeatherService.getWeather(outreachRequest.city, outreachRequest.stateCode, outreachRequest.countryCode)
 
         // The weather forecast for each day by every 3 hours. Let's assume we will take the forecast for noon.
-        val weatherForecastSorted = weatherForecast.days.filter { it.dateTime.toLocalTime() == LocalTime.NOON }.sortedBy { it.dateTime }
-        val weatherForecastFiveDays = weatherForecastSorted.take(5)
+        // Report on the first 5 days
+        val weatherForecastFiveDays = weatherForecast.days
+            .filter { it.dateTime.toLocalTime() == LocalTime.NOON }
+            .sortedBy { it.dateTime }
+            .take(5)
 
         val outreachRecommendation = OutreachResponse(
             city = outreachRequest.city,
