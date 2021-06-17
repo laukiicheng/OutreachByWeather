@@ -5,6 +5,8 @@ import com.acme.outreach.ServiceApplication
 import com.acme.outreach.models.OutreachRequest
 import com.acme.outreach.models.OutreachResponse
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.kotest.provided.BaseIntegrationTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -13,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = [ServiceApplication::class])
-// @TestPropertySource("${ResourceUtils.CLASSPATH_URL_PREFIX}${UtilityHelper.testPropertiesFilePath}")
 class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseIntegrationTest() {
 
     init {
@@ -31,11 +32,25 @@ class OutreachControllerIT(private val restTemplate: TestRestTemplate) : BaseInt
             )
 
             result.statusCode shouldBe HttpStatus.OK
-            // TODO: Validate the response
+            result.body shouldNotBe null
+            result.body.shouldBeInstanceOf<OutreachResponse>()
+            result?.body?.outreachByDay?.count() shouldBe 5
+        }
+
+        "f: POST should return BAD_REQUEST when city is not found" {
+            val outreachRequest = OutreachRequest(
+                city = "not a real city",
+                stateCode = "some state code",
+                countryCode = "US"
+            )
+
+            val result = restTemplate.postForEntity(
+                "/outreach",
+                UtilityHelper.createHttpEntity(outreachRequest),
+                OutreachResponse::class.java
+            )
+
+            result.statusCode shouldBe HttpStatus.BAD_REQUEST
         }
     }
-
-    // TODO: Write failing test cases
-
-    // TODO: Test ExceptionHandler in controller for WeatherDataNotFoundException
 }

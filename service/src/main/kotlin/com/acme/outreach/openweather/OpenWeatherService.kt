@@ -12,8 +12,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 
@@ -45,18 +45,16 @@ class OpenWeatherService(private val restTemplate: RestTemplate) {
             .build()
             .toUriString()
 
-        val weatherResponse = restTemplate.getForEntity(
-            URI(uri),
-            OpenWeatherResponse::class.java
-        )
-
-        if (weatherResponse.statusCode != HttpStatus.OK) {
-            // TODO: Check if invalid city or country code
+        // TODO: Handle 400 and 500 responses more gracefully
+        val weatherResponse = try {
+            restTemplate.getForEntity(
+                URI(uri),
+                OpenWeatherResponse::class.java
+            )
+        } catch (clientErrorException: HttpClientErrorException) {
             throw WeatherDataNotFoundException(
                 """
                 Open Weather API weather data not found
-                Http status code ${weatherResponse.statusCode}
-                Body ${weatherResponse.body}
                 City $city
                 State $state
                 """.trimIndent()
